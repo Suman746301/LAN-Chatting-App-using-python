@@ -157,26 +157,6 @@ def signup_command():
 
 ##forget password command
 def forget_command():
-    
-    ## function to send the otp
-    # creates SMTP session
-    s = smtplib.SMTP('smtp.gmail.com', 587)
-
-    # start TLS for security
-    s.starttls()
-
-    # Authentication
-    s.login("sender_email_id", "sender_email_id_password")
-
-    # message to be sent
-    message = random.randint(0,9)*1007
-    otp=message
-
-    # sending the mail
-    s.sendmail("sender_email_id", "receiver_email_id", message)
-
-    # terminating the session
-    s.quit()
  
  ###############################################################
 
@@ -188,35 +168,70 @@ def forget_command():
 
     def reset():
         username=user.get()
-        password=code.get()
-        conform_password=conform_code.get()
+        file=open('datasheet.txt','r+')
+        d=file.read()
+        r=ast.literal_eval(d)
+        file.close()
 
-        if OTP==otp:
-            try:
-                file=open('datasheet.txt','r+')
-                d=file.read()
-                r=ast.literal_eval(d)
+        if username in r.keys():
+            OTP=otp.get()
+            password=code.get()
+            conform_password=conform_code.get()
+    
+            ## function to send the otp
+            # creates SMTP session
+            s = smtplib.SMTP('smtp.gmail.com', 587)
 
-                dict2={username:password}
-                r.update(dict2)
-                file.truncate(0)
-                file.close()
+            # start TLS for security
+            s.starttls()
 
-                file=open('datasheet.txt','w')
-                w=file.write(str(r))
+            # Authentication
+            s.login("sender_email_id", "sender_email_id_password")
 
-                messagebox.showinfo('Signup','Successfully sign up')
-                window.destroy()
-                
-            ###if file is not present then it will create file
-            except:
-                file=open('datasheet.txt','w')
-                pp=str({'Username':'password'})
-                file.write(pp)
-                file.close()
+            # message to be sent
+            message = random.randint(0,9)*1007
+            otp_send=message
+
+            # sending the mail
+            s.sendmail("sender_email_id", "receiver_email_id", message)
+
+            # terminating the session
+            s.quit()
+
+            if otp_send==OTP:
+
+                if password==conform_password:
+                    try:
+                        file=open('datasheet.txt','r+')
+                        d=file.read()
+                        r=ast.literal_eval(d)
+
+                        dict2={username:password}
+                        r.update(dict2)
+                        file.truncate(0)
+                        file.close()
+
+                        file=open('datasheet.txt','w')
+                        w=file.write(str(r))
+
+                        messagebox.showinfo('Done','Successfully Changed')
+                        window.destroy()
+                    
+                ###if file is not present then it will create file
+                    except:
+                        file=open('datasheet.txt','w')
+                        pp=str({'Username':'password'})
+                        file.write(pp)
+                        file.close()  
+
+                else:
+                    messagebox.showerror('Invalid',"Both Password should match")
+
+            else:
+                messagebox.showerror('Invalid',"Wrong OTP")
 
         else:
-            messagebox.showerror('Invalid',"Both Password should match")    
+            messagebox.showerror('Invalid',"User name not found!")            
 
     ### if we click signin then signup should close
     def sign():
@@ -235,6 +250,22 @@ def forget_command():
     ######################
 
     def on_enter(e):
+        user.delete(0, 'end')
+
+    def on_leave(e):
+            name=user.get()
+            if name=='':
+                user.insert(0,'Username')
+
+    user= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
+    user.place(x=60, y=70)
+    user.insert(0,'Username')
+    user.bind('<FocusIn>', on_enter)
+    user.bind('FocusOut', on_leave)
+
+    ###################
+
+    def on_enter(e):
         conform_code.delete(0, 'end')
 
     def on_leave(e):
@@ -243,25 +274,25 @@ def forget_command():
                 conform_code.insert(0,'Conform Password')
 
     conform_code= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
-    conform_code.place(x=60, y=170)
+    conform_code.place(x=60, y=220)
     conform_code.insert(0,'Conform Password')
     conform_code.bind('<FocusIn>', on_enter)
     conform_code.bind('FocusOut', on_leave)
 
     ###############################
     def on_enter(e):
-        user.delete(0, 'end')
+        otp.delete(0, 'end')
 
     def on_leave(e):
-            name=user.get()
+            name=otp.get()
             if name=='':
-                user.insert(0,'OTP')
+                otp.insert(0,'OTP')
 
-    user= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
-    user.place(x=60, y=70)
-    user.insert(0,'OTP')
-    user.bind('<FocusIn>', on_enter)
-    user.bind('FocusOut', on_leave)
+    otp= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
+    otp.place(x=60, y=120)
+    otp.insert(0,'OTP')
+    otp.bind('<FocusIn>', on_enter)
+    otp.bind('FocusOut', on_leave)
 
     ###########################
     def on_enter(e):
@@ -273,18 +304,18 @@ def forget_command():
                 code.insert(0,'New Password')
 
     code= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
-    code.place(x=60, y=120)
+    code.place(x=60, y=170)
     code.insert(0,'New Password')
     code.bind('<FocusIn>', on_enter)
     code.bind('FocusOut', on_leave)
 
     #############################
-    Button(frame, width=25,pady=6,text='Done ', bg='#57a1f8', fg='white', border=0, command=reset).place(x=95, y=220)
+    Button(frame, width=25,pady=6,text='Done ', bg='#57a1f8', fg='white', border=0, command=reset).place(x=95, y=260)
     label=Label(frame,text="I have an accout?", fg='black', bg='white',font=('Microsoft YaHei UI Light', 9))
-    label.place(x=105, y=260)
+    label.place(x=105, y=300)
 
     sign_in= Button(frame, width=6, text='Sign in', border=0, bg='white', cursor='hand2',fg='#57a1f8',command=sign)
-    sign_in.place(x=215, y=260)
+    sign_in.place(x=215, y=300)
 
     window.mainloop()
 
