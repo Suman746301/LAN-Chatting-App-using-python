@@ -199,31 +199,36 @@ def forget_command():
             s.quit()
 
             if otp_send==OTP:
-                try:
-                    file=open('datasheet.txt','r+')
-                    d=file.read()
-                    r=ast.literal_eval(d)
 
-                    dict2={username:password}
-                    r.update(dict2)
-                    file.truncate(0)
-                    file.close()
+                if password==conform_password:
+                    try:
+                        file=open('datasheet.txt','r+')
+                        d=file.read()
+                        r=ast.literal_eval(d)
 
-                    file=open('datasheet.txt','w')
-                    w=file.write(str(r))
+                        dict2={username:password}
+                        r.update(dict2)
+                        file.truncate(0)
+                        file.close()
 
-                    messagebox.showinfo('Done','Successfully Changed')
-                    window.destroy()
-                
-            ###if file is not present then it will create file
-                except:
-                    file=open('datasheet.txt','w')
-                    pp=str({'Username':'password'})
-                    file.write(pp)
-                    file.close()  
+                        file=open('datasheet.txt','w')
+                        w=file.write(str(r))
+
+                        messagebox.showinfo('Done','Successfully Changed')
+                        window.destroy()
+                    
+                ###if file is not present then it will create file
+                    except:
+                        file=open('datasheet.txt','w')
+                        pp=str({'Username':'password'})
+                        file.write(pp)
+                        file.close()  
+
+                else:
+                    messagebox.showerror('Invalid',"Both Password should match")
 
             else:
-                messagebox.showerror('Invalid',"Both Password should match")
+                messagebox.showerror('Invalid',"Wrong OTP")
 
         else:
             messagebox.showerror('Invalid',"User name not found!")            
@@ -276,7 +281,7 @@ def forget_command():
 
     ###############################
     def on_enter(e):
-        user.delete(0, 'end')
+        otp.delete(0, 'end')
 
     def on_leave(e):
             name=otp.get()
