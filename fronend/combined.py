@@ -155,7 +155,9 @@ def signup_command():
     window.mainloop()
 
 
-##forget password command
+# forget password command
+
+
 def forget_command():
  
  ###############################################################
@@ -179,7 +181,9 @@ def forget_command():
             conform_password=conform_code.get()
     
             ## function to send the otp
+            
             # creates SMTP session
+            
             s = smtplib.SMTP('smtp.gmail.com', 587)
 
             # start TLS for security
@@ -322,6 +326,7 @@ def forget_command():
 ######################################3
 
 ##adding image to the login page
+
 img=PhotoImage(file='login.png')
 Label(root,image=img,bg='white').place(x=50,y=50)
 
