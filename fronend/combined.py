@@ -206,8 +206,9 @@ def forget_command():
                         d=file.read()
                         r=ast.literal_eval(d)
 
-                        dict2={username:password}
-                        r.update(dict2)
+                        #dict2={username:password}
+                        r.update({username:password})
+                        #r.update(dict2)
                         file.truncate(0)
                         file.close()
 

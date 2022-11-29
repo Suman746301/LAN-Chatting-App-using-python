@@ -69,8 +69,8 @@ def Send():
     
     
 def Receive():
-    main.title("receive")
     main=Toplevel(root)
+    main.title("receive")
     main.geometry("450x560+500+200")
     main.configure(bg="#f4fdfe")
     main.resizable(False,False)
