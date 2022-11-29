@@ -69,6 +69,10 @@ def Send():
     
     
 def Receive():
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 9d9a4b72a1a38960b4bf486eb0573e2af35a7c38
     main=Toplevel(root)
     main.title("receive")
     main.geometry("450x560+500+200")
@@ -152,6 +156,7 @@ Label(root,text="send",font=("Acumin Variable Concept",17,"bold"),bg="#f4fdfe").
 Label(root,text="receive",font=("Acumin Variable Concept",17,"bold"),bg="#f4fdfe").place(x=300,y=200)
 back_image=PhotoImage(file="images/send.png")
 Label(root,image=back_image).place(x=65,y=323)
+
 root.mainloop()
 
 
