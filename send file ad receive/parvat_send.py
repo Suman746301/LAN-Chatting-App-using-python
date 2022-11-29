@@ -93,20 +93,13 @@ def Receive():
         print("file hads been received")
         
       
-        
-     
-        
-        
+      
     
     #icon
     
-    image_icon1=PhotoImage(file="images/receive.png")
+    image_icon1=PhotoImage(file="images/send.png")
     main.iconphoto(False,image_icon1)
 
-
-
-
-    
     Hbackground=PhotoImage(file="images/send.png")
     Label(main,image=Hbackground).place(x=-2,y=0)
     
