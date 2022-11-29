@@ -69,7 +69,10 @@ def Send():
     
     
 def Receive():
+<<<<<<< HEAD
+=======
     
+>>>>>>> 9d9a4b72a1a38960b4bf486eb0573e2af35a7c38
     main=Toplevel(root)
     main.title("receive")
     main.geometry("450x560+500+200")
