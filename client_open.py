@@ -1,17 +1,14 @@
 from tkinter import *
 from tkinter import messagebox
+from multiprocessing import Process
 import ast
 import smtplib
 import random
-from tkinter import *
-from tkinter import font
-from tkinter import ttk 
-from tkinter import *
-from tkinter import messagebox
 from tkinter import filedialog
 import ast
 import smtplib
 import random
+import time
 import os
 import tqdm
 import socket
@@ -19,9 +16,6 @@ import threading
 from tkinter import *
 from tkinter import font
 from tkinter import ttk 
-from tkinter import *
-from tkinter import messagebox
-from tkinter import filedialog
 import ast
 import smtplib
 import random
@@ -96,16 +90,9 @@ def chat_page():
 		s.close()
 
 
-
-
-
-
-
-
  ##################################################
  
  
-
 	class GUI:
 		# constructor method
 		def __init__(self):
@@ -489,10 +476,10 @@ def forget_command(username):
     otp_send=message
     print(otp_send)
     # sending the mail
-    s.sendmail("suaravsuman991@gmail.com", "itssuman7463@gmail.com", str(otp_send))
+    s.sendmail("suaravsuman991@gmail.com", username, str(otp_send))
 
     # terminating the session
-    s.quit()
+    s.quit()  
 
     ############################
     def reset():
@@ -641,7 +628,8 @@ def reset_send_otp():
         if username in r.keys():
             pass
         else:
-            messagebox.showerror('Invalid',"User name not found!")     
+            messagebox.showerror('Invalid',"User name not found!")
+            exit()     
         return username
 
     def sign():
@@ -649,7 +637,15 @@ def reset_send_otp():
     
     def send_user():
         username=signup()
+        # if __name__=='__main__':
+        #     p1 = Process(target=forget_command(username))
+        #     p1.start()
+        #     p2 = Process(target=messagebox.showinfo('OK',"OTP send"))
+        #     p2.start()
+        #     p2.join()
+        sign()
         forget_command(username)
+        
 
     img=PhotoImage(file='login.png')
     Label(window,image=img,bg='white').place(x=50,y=50)
@@ -738,7 +734,7 @@ forget_password= Button(frame, width=20, text='Forget password!', border=0, bg='
 forget_password.place(x=160, y=160)
 
 def window_destroy_signup():
-    root.geometry('0x0+0+0')
+    #root.geometry('0x0+0+0')
     signup_command()
 
 sign_up= Button(frame, width=6, text='Sign up', border=0, bg='white', cursor='hand2',fg='#57a1f8',command=window_destroy_signup)
