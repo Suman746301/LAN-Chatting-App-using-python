@@ -1,15 +1,10 @@
 from tkinter import *
 from tkinter import messagebox
 import ast
-import smtplib
 import random
-from tkinter import *
 from tkinter import font
 from tkinter import ttk 
-from tkinter import *
-from tkinter import messagebox
 from tkinter import filedialog
-import ast
 from tkinter import font as tkFont
 import smtplib
 import random
@@ -21,17 +16,12 @@ from email.mime.base import MIMEBase
 from email import encoders
 import socket
 import threading
-from tkinter import *
-from tkinter import font
-from tkinter import ttk 
-from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 import ast
 import smtplib
 import random
-import os
-import tqdm
+from email.message import EmailMessage
 
 root=Tk()
 root.title('Login')
@@ -43,10 +33,9 @@ helv36 = tkFont.Font(family='Helvetica', size=16, weight=tkFont.BOLD)
 ###################3
 
 
-
 def chat_page():
 	PORT = 5000
-	SERVER = "172.16.181.49"
+	SERVER = "172.16.185.179"
 	ADDRESS = (SERVER, PORT)
 	FORMAT = "utf-8"
 
@@ -100,13 +89,6 @@ def chat_page():
 				progress.update(len(bytes_read))
 
 		s.close()
-
-
-
-
-
-
-
 
  ##################################################
  
@@ -278,10 +260,7 @@ def chat_page():
 								relwidth=0.14)
 
 
-
-
 ###########################################
-
 
 
 			self.textCons.config(cursor="arrow")
@@ -339,9 +318,6 @@ def chat_page():
 
 	g=GUI()			
 	# create a GUI class object
-
-
-
 
 
 ###################
@@ -411,12 +387,8 @@ def signup_command():
        window.destroy()
 
 
-    # img=PhotoImage(file='login.png')
-    # Label(window,image=img,bg='white').place(x=50,y=50)
+#####################################
 
-    # #placing the login icon on the page
-    # frame=Frame(window,width=450,height=350,bg="white")
-    # frame.place(x=480,y=70)
     img=PhotoImage(file='login.png')
     Label(window,image=img,bg='white').place(x=-10,y=-10)
 
@@ -427,7 +399,7 @@ def signup_command():
     heading=Label(frame,text='Sign up',fg='#0652DD', bg='#c7ecee', font=('Microsoft YaHei UI Light',23,'bold'))
     heading.place(x=125,y=5)
 
-    ######################
+    #################################
 
     def on_enter(e):
         conform_code.delete(0, 'end')
@@ -443,7 +415,7 @@ def signup_command():
     conform_code.bind('<FocusIn>', on_enter)
     conform_code.bind('FocusOut', on_leave)
 
-    ###############################
+    ###################################
     def on_enter(e):
         user.delete(0, 'end')
 
@@ -473,7 +445,8 @@ def signup_command():
     code.bind('<FocusIn>', on_enter)
     code.bind('FocusOut', on_leave)
 
-    #############################
+#####################################
+
     Button(frame, width=39,pady=6,text='Sign up', bg='#0652DD', fg='white', border=0, command=signup,font=('Microsoft YaHei UI Light', 10)).place(x=60, y=220)
     label=Label(frame,text="I have an accout?", fg='black', bg='#c7ecee',font=('Microsoft YaHei UI Light', 11,"bold"))
     label.place(x=105, y=270)
@@ -495,100 +468,30 @@ def forget_command(username):
     window.resizable(True,True)
  ###############################################################
     ## function to send the otp
-            
-    # creates SMTP session
-    
-    s = smtplib.SMTP('smtp.gmail.com', 587)
 
-    # start TLS for security
-    s.starttls()
+    msg = EmailMessage()
 
-    # Authentication
-    s.login("suaravsuman991@gmail.com", "pajytmtqnsitrfea")
+    msg['Subject'] = 'Password Request Code Generated'
+    msg['From'] = "suaravsuman991@gmail.com"
+    msg['To'] = username
 
-    # message to be sent
     message = random.randint(1,9)*102207
     otp_send=message
     print(otp_send)
-    # sending the mail
-    s.sendmail("suaravsuman991@gmail.com", username, str(otp_send))
-
-    # terminating the session
-    s.quit()
-    
-    # Python code to illustrate Sending mail with attachments
-# from your Gmail account
+    msg.set_content('Your OTP is '+str(otp_send))
+    # Send the message via our own SMTP server.
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server.login("suaravsuman991@gmail.com", "pajytmtqnsitrfea")
+    server.send_message(msg)
+    server.quit()
 
 
-
-    # fromaddr = "suaravsuman991@gmail.com"
-    # toaddr = username
-
-	# # instance of MIMEMultipart
-    # msg = MIMEMultipart()
-
-	# # storing the senders email address
-    # msg['From'] = fromaddr
-
-	# # storing the receivers email address
-    # msg['To'] = toaddr
-
-	# # storing the subject
-    # msg['Subject'] = "Reset password Request"
-
-	# # string to store the body of the mail
-    # body = "Your OTP is"
-
-	# # attach the body with the msg instance
-    # msg.attach(MIMEText(body, 'plain'))
-    
-    # # message to be sent
-    # message = random.randint(1,9)*102207
-    # otp_send=message
-    # print(otp_send)
-
-	# # open the file to be sent
-    # # filename = "File_name_with_extension"
-    # # attachment = open("Path of the file", "rb")
-
-	# # instance of MIMEBase and named as p
-    # # p = MIMEBase('application', 'octet-stream')
-
-	# # To change the payload into encoded form
-    # # p.set_payload((attachment).read())
-
-	# # encode into base64
-    # # encoders.encode_base64(p)
-
-    # # p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-
-	# # attach the instance 'p' to instance 'msg'
-    # msg.attach()
-
-	# # creates SMTP session
-    # s = smtplib.SMTP('smtp.gmail.com', 587)
-
-	# # start TLS for security
-    # s.starttls()
-
-	# # Authentication
-    # s.login(fromaddr, "Password_of_the_sender")
-
-	# # Converts the Multipart msg into a string
-    # text = msg.as_string()
-
-	# # sending the mail
-    # s.sendmail(fromaddr, toaddr, body+str(otp_send))
-
-	# # terminating the session
-    # s.quit()
-
-
-    # ############################
+#############################
     def reset():
         OTP=otp.get()
         if otp_send==int(OTP):
-            messagebox.showinfo('OK',"OTP validated")
+            #messagebox.showinfo('OK',"OTP validated")
+            pass
         else:
             messagebox.showerror('Invalid',"Wrong OTP")
     
@@ -626,12 +529,8 @@ def forget_command(username):
             messagebox.showerror('Invalid',"Both Password should match")
         #window.destroy()
 
-    # img=PhotoImage(file='login.png')
-    # Label(window,image=img,bg='white').place(x=50,y=50)
+######################################
 
-    # #placing the login icon on the page
-    # frame=Frame(window,width=450,height=280,bg="white")
-    # frame.place(x=480,y=70)
     img=PhotoImage(file='login.png')
     Label(window,image=img,bg='white').place(x=-10,y=-10)
 
