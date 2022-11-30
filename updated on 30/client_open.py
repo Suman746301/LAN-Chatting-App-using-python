@@ -119,16 +119,16 @@ def chat_page():
 			# login window
 			self.login = Toplevel()
 			# set the title
-			self.login.title("Login")
-			self.login.resizable(width=False,
-								height=False)
+			self.login.title("User Name")
+			self.login.resizable(width=True,
+								height=True)
 			self.login.configure(width=400,
-								height=300)
+								height=300,bg="#c7ecee")
 			# create a Label
 			self.pls = Label(self.login,
-							text="Please enter login",
+							text="Please enter your Name",
 							justify=CENTER,
-							font="Helvetica 14 bold")
+							font="Helvetica 14 bold",bg="#c7ecee")
 
 			self.pls.place(relheight=0.15,
 						relx=0.2,
@@ -136,21 +136,21 @@ def chat_page():
 			# create a Label
 			self.labelName = Label(self.login,
 								text="Name: ",
-								font="Helvetica 12")
+								font="Helvetica 14",bg="#c7ecee")
 
 			self.labelName.place(relheight=0.2,
 								relx=0.1,
-								rely=0.2)
+								rely=0.35)
 
 			# create a entry box for
 			# tyoing the message
 			self.entryName = Entry(self.login,
 								font="Helvetica 14")
 
-			self.entryName.place(relwidth=0.4,
+			self.entryName.place(relwidth=0.56,
 								relheight=0.12,
 								relx=0.35,
-								rely=0.2)
+								rely=0.4)
 
 			# set the focus of the cursor
 			self.entryName.focus()
@@ -159,11 +159,14 @@ def chat_page():
 			# along with action
 			self.go = Button(self.login,
 							text="CONTINUE",
+                            fg="#fff",
+                            width=18,
+                            bg="#0652DD",
 							font="Helvetica 14 bold",
 							command=lambda: self.goAhead(self.entryName.get()))
 
-			self.go.place(relx=0.4,
-						rely=0.55)
+			self.go.place(relx=0.35,
+						rely=0.60)
 			self.Window.mainloop()
 
 		def goAhead(self, name):
@@ -629,7 +632,7 @@ def reset_send_otp():
     window=Toplevel(root)
     window.title("Password Reset")
     window.geometry('2160x1080')
-    window.configure(bg='#fff')
+    window.configure(bg='#c7ecee')
     window.resizable(True,True)
 
     #####################
