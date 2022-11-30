@@ -35,7 +35,7 @@ helv36 = tkFont.Font(family='Helvetica', size=16, weight=tkFont.BOLD)
 
 def chat_page():
 	PORT = 5000
-	SERVER = "172.16.185.179"
+	SERVER = "172.16.181.49"
 	ADDRESS = (SERVER, PORT)
 	FORMAT = "utf-8"
 
@@ -171,14 +171,14 @@ def chat_page():
 			self.name = name
 			# to show chat window
 			self.Window.deiconify()
-			self.Window.geometry('2160x1080')
-			Label(self.Window).place(x=0,y=0)
+			#self.Window.geometry('2160x1080')
+			#Label(self.Window).place(x=0,y=0)
 			self.Window.title("CHATROOM")
 			self.Window.resizable(width=True,
 								height=True)
             
-			self.Window.configure(width=400,
-								height=300,
+			self.Window.configure(width=600,
+								height=500,
 								bg="#17202A")
             
 			self.labelHead = Label(self.Window,
@@ -190,7 +190,7 @@ def chat_page():
 
 			self.labelHead.place(relwidth=1)
 			self.line = Label(self.Window,
-							width=550,
+							width=650,
 							bg="#ABB2B9")
 
 			self.line.place(relwidth=1,
@@ -218,7 +218,7 @@ def chat_page():
 								rely=0.825)
 
 			self.entryMsg = Entry(self.labelBottom,
-								bg="#2C3E50",
+								bg="#17202A",
 								fg="#EAECEE",
 								font="Helvetica 13")
 
@@ -236,7 +236,7 @@ def chat_page():
 									text="Send",
 									font="Helvetica 10 bold",
 									width=16,
-									bg="#ABB2B9",
+									bg="#c7ecee",
 									command=lambda: self.sendButton(self.entryMsg.get()))
 
 			self.buttonMsg.place(relx=0.77,
@@ -246,10 +246,10 @@ def chat_page():
 ##############################################
 			
 			self.buttonMsg = Button(self.labelBottom,
-									text="attach",
+									text="Attach",
 									font="Helvetica 10 bold",
 									width=4,
-									bg="#ABB2B9",
+									bg="#c7ecee",
 									command=send_file)
 	
 									

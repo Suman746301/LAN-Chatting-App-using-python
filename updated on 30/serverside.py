@@ -138,7 +138,8 @@ def startChat():
 		print(f"active connections {threading.activeCount()-1}")
         
   
-  ###########################################################
+  ###################################################################
+
 
 # method to handle the
 # incoming messages
