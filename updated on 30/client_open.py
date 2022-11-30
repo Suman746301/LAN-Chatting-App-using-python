@@ -15,6 +15,10 @@ import smtplib
 import random
 import os
 import tqdm
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 import socket
 import threading
 from tkinter import *
@@ -111,7 +115,7 @@ def chat_page():
 	class GUI:
 		# constructor method
 		def __init__(self):
-
+			root.destroy()
 			# chat window which is currently hidden
 			self.Window = Tk()
 			self.Window.withdraw()
@@ -122,13 +126,14 @@ def chat_page():
 			self.login.title("User Name")
 			self.login.resizable(width=True,
 								height=True)
+			self.login.geometry('2160x1080')
 			self.login.configure(width=400,
 								height=300,bg="#c7ecee")
 			# create a Label
 			self.pls = Label(self.login,
 							text="Please enter your Name",
 							justify=CENTER,
-							font="Helvetica 14 bold",bg="#c7ecee")
+							font="Helvetica 16 bold",bg="#c7ecee")
 
 			self.pls.place(relheight=0.15,
 						relx=0.2,
@@ -136,18 +141,19 @@ def chat_page():
 			# create a Label
 			self.labelName = Label(self.login,
 								text="Name: ",
-								font="Helvetica 14",bg="#c7ecee")
+        						width=20,
+								font="Helvetica 16",bg="#c7ecee")
 
 			self.labelName.place(relheight=0.2,
-								relx=0.1,
+								relx=0.2,
 								rely=0.35)
 
 			# create a entry box for
 			# tyoing the message
 			self.entryName = Entry(self.login,
-								font="Helvetica 14")
+								font="Helvetica 12")
 
-			self.entryName.place(relwidth=0.56,
+			self.entryName.place(relwidth=0.40,
 								relheight=0.12,
 								relx=0.35,
 								rely=0.4)
@@ -160,12 +166,12 @@ def chat_page():
 			self.go = Button(self.login,
 							text="CONTINUE",
                             fg="#fff",
-                            width=18,
+                            width=22,
                             bg="#0652DD",
-							font="Helvetica 14 bold",
+							font="Helvetica 18 bold",
 							command=lambda: self.goAhead(self.entryName.get()))
 
-			self.go.place(relx=0.35,
+			self.go.place(relx=0.42,
 						rely=0.60)
 			self.Window.mainloop()
 
@@ -183,12 +189,16 @@ def chat_page():
 			self.name = name
 			# to show chat window
 			self.Window.deiconify()
+			self.Window.geometry('2160x1080')
+			Label(self.Window).place(x=0,y=0)
 			self.Window.title("CHATROOM")
-			self.Window.resizable(width=False,
-								height=False)
-			self.Window.configure(width=470,
-								height=550,
+			self.Window.resizable(width=True,
+								height=True)
+            
+			self.Window.configure(width=400,
+								height=300,
 								bg="#17202A")
+            
 			self.labelHead = Label(self.Window,
 								bg="#17202A",
 								fg="#EAECEE",
@@ -198,7 +208,7 @@ def chat_page():
 
 			self.labelHead.place(relwidth=1)
 			self.line = Label(self.Window,
-							width=450,
+							width=550,
 							bg="#ABB2B9")
 
 			self.line.place(relwidth=1,
@@ -208,7 +218,7 @@ def chat_page():
 			self.textCons = Text(self.Window,
 								width=20,
 								height=2,
-								bg="#17202A",
+								bg="#273c75",
 								fg="#EAECEE",
 								font="Helvetica 14",
 								padx=5,
@@ -501,12 +511,80 @@ def forget_command(username):
     otp_send=message
     print(otp_send)
     # sending the mail
-    s.sendmail("suaravsuman991@gmail.com", "itssuman7463@gmail.com", str(otp_send))
+    s.sendmail("suaravsuman991@gmail.com", username, str(otp_send))
 
     # terminating the session
     s.quit()
+    
+    # Python code to illustrate Sending mail with attachments
+# from your Gmail account
 
-    ############################
+
+
+    # fromaddr = "suaravsuman991@gmail.com"
+    # toaddr = username
+
+	# # instance of MIMEMultipart
+    # msg = MIMEMultipart()
+
+	# # storing the senders email address
+    # msg['From'] = fromaddr
+
+	# # storing the receivers email address
+    # msg['To'] = toaddr
+
+	# # storing the subject
+    # msg['Subject'] = "Reset password Request"
+
+	# # string to store the body of the mail
+    # body = "Your OTP is"
+
+	# # attach the body with the msg instance
+    # msg.attach(MIMEText(body, 'plain'))
+    
+    # # message to be sent
+    # message = random.randint(1,9)*102207
+    # otp_send=message
+    # print(otp_send)
+
+	# # open the file to be sent
+    # # filename = "File_name_with_extension"
+    # # attachment = open("Path of the file", "rb")
+
+	# # instance of MIMEBase and named as p
+    # # p = MIMEBase('application', 'octet-stream')
+
+	# # To change the payload into encoded form
+    # # p.set_payload((attachment).read())
+
+	# # encode into base64
+    # # encoders.encode_base64(p)
+
+    # # p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+	# # attach the instance 'p' to instance 'msg'
+    # msg.attach()
+
+	# # creates SMTP session
+    # s = smtplib.SMTP('smtp.gmail.com', 587)
+
+	# # start TLS for security
+    # s.starttls()
+
+	# # Authentication
+    # s.login(fromaddr, "Password_of_the_sender")
+
+	# # Converts the Multipart msg into a string
+    # text = msg.as_string()
+
+	# # sending the mail
+    # s.sendmail(fromaddr, toaddr, body+str(otp_send))
+
+	# # terminating the session
+    # s.quit()
+
+
+    # ############################
     def reset():
         OTP=otp.get()
         if otp_send==int(OTP):
