@@ -111,7 +111,7 @@ def startChat():
 
 
 #############################################
-		receive()
+		#receive()
 		# accept connections and returns
 		# a new connection to the client
 		# and the address bound to it
