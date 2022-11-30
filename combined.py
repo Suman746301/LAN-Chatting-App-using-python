@@ -362,7 +362,7 @@ def on_leave(e):
         if name=='':
             code.insert(0,'Password')
 
-code= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
+code= Entry(frame,width=30,show="\u25CF",fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
 code.place(x=60, y=130)
 code.insert(0,'Password')
 code.bind('<FocusIn>', on_enter)

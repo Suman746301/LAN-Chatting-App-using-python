@@ -10,6 +10,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 import ast
+from tkinter import font as tkFont
 import smtplib
 import random
 import os
@@ -30,9 +31,10 @@ import tqdm
 
 root=Tk()
 root.title('Login')
-root.geometry('1960x1080+300+200')
+root.geometry('2160x1680')
 root.configure(bg="#fff")
 root.resizable(True,True)
+helv36 = tkFont.Font(family='Helvetica', size=16, weight=tkFont.BOLD)
 
 ###################3
 
@@ -354,9 +356,9 @@ def signin():
 def signup_command():
     window=Toplevel(root)
     window.title("SignUp")
-    window.geometry('925x500+300+200')
+    window.geometry('2160x1080')
     window.configure(bg='#fff')
-    window.resizable(False,False)
+    window.resizable(True,True)
 
     def signup():
         username=user.get()
@@ -395,15 +397,22 @@ def signup_command():
     def sign():
        window.destroy()
 
+
+    # img=PhotoImage(file='login.png')
+    # Label(window,image=img,bg='white').place(x=50,y=50)
+
+    # #placing the login icon on the page
+    # frame=Frame(window,width=450,height=350,bg="white")
+    # frame.place(x=480,y=70)
     img=PhotoImage(file='login.png')
-    Label(window,image=img,bg='white').place(x=50,y=50)
+    Label(window,image=img,bg='white').place(x=-10,y=-10)
 
     #placing the login icon on the page
-    frame=Frame(window,width=450,height=350,bg="white")
-    frame.place(x=480,y=70)
+    frame=Frame(window,width=450,height=350,bg="#c7ecee")
+    frame.place(relx=0.35,rely=0.2)
 
-    heading=Label(frame,text='Sign up',fg='#57a1f8', bg='white', font=('Microsoft YaHei UI Light',23,'bold'))
-    heading.place(x=115,y=5)
+    heading=Label(frame,text='Sign up',fg='#0652DD', bg='#c7ecee', font=('Microsoft YaHei UI Light',23,'bold'))
+    heading.place(x=125,y=5)
 
     ######################
 
@@ -415,7 +424,7 @@ def signup_command():
             if name=='':
                 conform_code.insert(0,'Conform Password')
 
-    conform_code= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
+    conform_code= Entry(frame,width=35,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11,"bold"))
     conform_code.place(x=60, y=170)
     conform_code.insert(0,'Conform Password')
     conform_code.bind('<FocusIn>', on_enter)
@@ -430,7 +439,7 @@ def signup_command():
             if name=='':
                 user.insert(0,'E-mail')
 
-    user= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
+    user= Entry(frame,width=35,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11,"bold"))
     user.place(x=60, y=70)
     user.insert(0,'E-mail')
     user.bind('<FocusIn>', on_enter)
@@ -445,19 +454,19 @@ def signup_command():
             if name=='':
                 code.insert(0,'Password')
 
-    code= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
+    code= Entry(frame,width=35,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11,"bold"))
     code.place(x=60, y=120)
     code.insert(0,'Password')
     code.bind('<FocusIn>', on_enter)
     code.bind('FocusOut', on_leave)
 
     #############################
-    Button(frame, width=25,pady=6,text='Sign up', bg='#57a1f8', fg='white', border=0, command=signup).place(x=95, y=220)
-    label=Label(frame,text="I have an accout?", fg='black', bg='white',font=('Microsoft YaHei UI Light', 9))
-    label.place(x=105, y=260)
+    Button(frame, width=39,pady=6,text='Sign up', bg='#0652DD', fg='white', border=0, command=signup,font=('Microsoft YaHei UI Light', 10)).place(x=60, y=220)
+    label=Label(frame,text="I have an accout?", fg='black', bg='#c7ecee',font=('Microsoft YaHei UI Light', 11,"bold"))
+    label.place(x=105, y=270)
 
-    sign_in= Button(frame, width=6, text='Sign in', border=0, bg='white', cursor='hand2',fg='#57a1f8',command=sign)
-    sign_in.place(x=215, y=260)
+    sign_in= Button(frame, width=6, text='Sign in', border=0, bg='#c7ecee', cursor='hand2',fg='#0652DD',command=sign,font=('Microsoft YaHei UI Light', 11,"bold"))
+    sign_in.place(x=245, y=270)
 
     window.mainloop()
 
@@ -468,9 +477,9 @@ def signup_command():
 def forget_command(username):
     window=Toplevel(root)
     window.title("SignUp")
-    window.geometry('925x500+300+200')
+    window.geometry('2160x1080')
     window.configure(bg='#fff')
-    window.resizable(False,False)
+    window.resizable(True,True)
  ###############################################################
     ## function to send the otp
             
@@ -536,32 +545,25 @@ def forget_command(username):
             messagebox.showerror('Invalid',"Both Password should match")
         #window.destroy()
 
+    # img=PhotoImage(file='login.png')
+    # Label(window,image=img,bg='white').place(x=50,y=50)
+
+    # #placing the login icon on the page
+    # frame=Frame(window,width=450,height=280,bg="white")
+    # frame.place(x=480,y=70)
     img=PhotoImage(file='login.png')
-    Label(window,image=img,bg='white').place(x=50,y=50)
+    Label(window,image=img,bg='white').place(x=-10,y=-10)
 
     #placing the login icon on the page
-    frame=Frame(window,width=450,height=280,bg="white")
-    frame.place(x=480,y=70)
+    frame=Frame(window,width=450,height=350,bg="#c7ecee")
+    frame.place(relx=0.35,rely=0.2)
 
-    heading=Label(frame,text='Reset Password',fg='#57a1f8', bg='white', font=('Microsoft YaHei UI Light',21,'bold'))
-    heading.place(x=70,y=5)  
+    heading=Label(frame,text='Reset Password',fg='#0652DD', bg='#c7ecee', font=('Microsoft YaHei UI Light',22,'bold'))
+    heading.place(x=100,y=5)  
 
     ######################
 
-    '''def on_enter(e):
-        user.delete(0, 'end')
-
-    def on_leave(e):
-            name=user.get()
-            if name=='':
-                user.insert(0,'Username')
-
-    user= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
-    user.place(x=60, y=70)
-    user.insert(0,'Username')
-    user.bind('<FocusIn>', on_enter)
-    user.bind('FocusOut', on_leave)'''
-
+    
     ###################
 
     def on_enter(e):
@@ -572,11 +574,11 @@ def forget_command(username):
             if name=='':
                 conform_code.insert(0,'Conform Password')
 
-    conform_code= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
-    conform_code.place(x=60, y=170)
+    conform_code= Entry(frame,width=33,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11,"bold"))
+    conform_code.place(x=60, y=180)
     conform_code.insert(0,'Conform Password')
     conform_code.bind('<FocusIn>', on_enter)
-    conform_code.bind('FocusOut', on_leave)
+    conform_code.bind('<FocusOut>', on_leave)
 
     ###############################
     def on_enter(e):
@@ -587,11 +589,11 @@ def forget_command(username):
             if name=='':
                 otp.insert(0,'OTP')
 
-    otp= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
-    otp.place(x=60, y=70)
+    otp= Entry(frame,width=33,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11,"bold"))
+    otp.place(x=60, y=80)
     otp.insert(0,'OTP')
     otp.bind('<FocusIn>', on_enter)
-    otp.bind('FocusOut', on_leave)
+    otp.bind('<FocusOut>', on_leave)
 
     ###########################
     def on_enter(e):
@@ -602,17 +604,17 @@ def forget_command(username):
             if name=='':
                 code.insert(0,'New Password')
 
-    code= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
-    code.place(x=60, y=120)
+    code= Entry(frame,width=33,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11,"bold"))
+    code.place(x=60, y=130)
     code.insert(0,'New Password')
     code.bind('<FocusIn>', on_enter)
-    code.bind('FocusOut', on_leave)
+    code.bind('<FocusOut>', on_leave)
 
     #############################
-    sign_in= Button(frame, width=0, text='', border=0, bg='white', cursor='hand2',fg='#57a1f8', command=reset)
+    sign_in= Button(frame, width=0, text='', border=0, bg='#c7ecee', cursor='hand2',fg='#0652DD', command=reset)
     sign_in.place(x=215, y=98)
 
-    Button(frame, width=25,pady=6,text='Done ', bg='#57a1f8', fg='white', border=0,command=sign).place(x=95, y=220)
+    Button(frame, width=42,pady=6,text='Done', bg='#0652DD', fg='white', border=0,command=sign).place(x=60, y=230)
     #label=Label(frame,text="I have an accout?", fg='black', bg='white',font=('Microsoft YaHei UI Light', 9))
     #label.place(x=105, y=220)
 
@@ -626,9 +628,9 @@ def forget_command(username):
 def reset_send_otp():
     window=Toplevel(root)
     window.title("Password Reset")
-    window.geometry('925x500+300+200')
+    window.geometry('2160x1080')
     window.configure(bg='#fff')
-    window.resizable(False,False)
+    window.resizable(True,True)
 
     #####################
     def signup():
@@ -651,15 +653,24 @@ def reset_send_otp():
         username=signup()
         forget_command(username)
 
+    # img=PhotoImage(file='login.png')
+    # Label(window,image=img,bg='white').place(x=50,y=50)
+
+    # #placing the login icon on the page
+    # frame=Frame(window,width=450,height=250,bg="white")
+    # frame.place(x=480,y=70)
+    
     img=PhotoImage(file='login.png')
-    Label(window,image=img,bg='white').place(x=50,y=50)
+    Label(window,image=img,bg='white').place(x=-10,y=-10)
 
     #placing the login icon on the page
-    frame=Frame(window,width=450,height=250,bg="white")
-    frame.place(x=480,y=70)
+    frame=Frame(window,width=450,height=350,bg="#c7ecee")
+    frame.place(relx=0.35,rely=0.2)
+        
+    
 
-    heading=Label(frame,text='Reset Password',fg='#57a1f8', bg='white', font=('Microsoft YaHei UI Light',21,'bold'))
-    heading.place(x=70,y=5) 
+    heading=Label(frame,text='Reset Password',fg='#0652DD', bg='#c7ecee', font=('Microsoft YaHei UI Light',21,'bold'))
+    heading.place(x=100,y=18) 
 
     def on_enter(e):
          user.delete(0, 'end')
@@ -669,18 +680,18 @@ def reset_send_otp():
             if name=='':
                 user.insert(0,'E-mail')
 
-    user= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
-    user.place(x=60, y=70)
+    user= Entry(frame,width=28,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 14))
+    user.place(x=60, y=92)
     user.insert(0,'E-mail')
     user.bind('<FocusIn>', on_enter)
     user.bind('FocusOut', on_leave)  
  
-    Button(frame, width=22,pady=6,text='Continue ', bg='#57a1f8', fg='white', border=0,command=send_user).place(x=90, y=120)
+    Button(frame, width=44,pady=6,text='Continue ', bg='#0652DD', fg='white', border=0,command=send_user).place(x=60, y=165)
     #label=Label(frame,text="I have an accout?", fg='black', bg='white',font=('Microsoft YaHei UI Light', 9))
     #label.place(x=60, y=100)
 
-    sign_in= Button(frame, width=6, text='Back', border=0, bg='white', cursor='hand2',fg='#57a1f8',command=sign)
-    sign_in.place(x=250, y=125)
+    sign_in= Button(frame, width=6, text='Back', border=0, bg='#c7ecee', cursor='hand2',fg='#0652DD',font=('Microsoft YaHei UI Light', 11,"bold"),command=sign)
+    sign_in.place(x=5, y=8)
 
     # sign_in= Button(frame, width=8, text='Send OTP', border=0, bg='white', cursor='hand2',fg='#57a1f8', command=reset)
     # sign_in.place(x=215, y=98)
@@ -689,60 +700,60 @@ def reset_send_otp():
 ##adding image to the login page
 
 img=PhotoImage(file='login.png')
-Label(root,image=img,bg='white').place(x=50,y=50)
+Label(root,image=img,bg='white').place(x=-10,y=-10)
 
 #placing the login icon on the page
-frame=Frame(root,width=350,height=350,bg="white")
-frame.place(x=480,y=70)
+frame=Frame(root,width=450,height=350,bg="#c7ecee")
+frame.place(relx=0.35,rely=0.2)
 
-heading=Label(frame,text='Sign in',fg='#57a1f8', bg='white', font=('Microsoft YaHei UI Light',23,'bold'))
-heading.place(x=115,y=5)
+
+heading=Label(frame,text='Sign in',fg='#0652DD', bg='#c7ecee', font=('Microsoft YaHei UI Light',23,'bold'))
+heading.place(x=170,y=5)
 
 
 def on_enter(e):
-    user.delete(0, 'end')
+    user.delete(0,'end')
 
 def on_leave(e):
         name=user.get()
-        if name=='':
-            user.insert(0,'E-mail')
+        if (name==""):
+            user.insert(0,"E-mail")
 
-user= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
+user= Entry(frame,width=40,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
 user.place(x=60, y=70)
-user.insert(0,'E-mail')
-user.bind('<FocusIn>', on_enter)
-user.bind('FocusOut', on_leave)
+user.insert(0,"E-mail")
+user.bind("<FocusIn>", on_enter)
+user.bind("<FocusOut>", on_leave)
 
-#Frame(frame,width=295,bg='black').place(x=25,y=107)
 def on_enter(e):
-    code.delete(0, 'end')
+    code.delete(0,'end')
 
 def on_leave(e):
-        name=user.get()
-        if name=='':
+        name=code.get()
+        if name=="":
             code.insert(0,'Password')
 
-code= Entry(frame,width=30,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
+code= Entry(frame,width=40,fg='black', border=2,bg="white",font=('Microsoft YaHei UI Light', 11))
 code.place(x=60, y=130)
 code.insert(0,'Password')
 code.bind('<FocusIn>', on_enter)
-code.bind('FocusOut', on_leave)
+code.bind('<FocusOut>', on_leave)
 
 #######################
 
-Button(frame, width=25,pady=6,text='Sign in', bg='#57a1f8', fg='white', border=0,command=signin).place(x=95, y=200)
-label=Label(frame,text="Don't have an accout?", fg='black', bg='white',font=('Microsoft YaHei UI Light', 9))
-label.place(x=98, y=250)
+Button(frame, width=35,height=-5,pady=6,text='Log In', bg='#0652DD',font=('Microsoft YaHei UI Light', 10, "bold"), fg='white', border=0,command=signin).place(x=60, y=180)
+label=Label(frame,text="Don't have an accout?", fg='black', bg='#c7ecee',font=('Microsoft YaHei UI Light', 11, "bold"))
+label.place(x=98, y=261)
 
-forget_password= Button(frame, width=20, text='Forget password!', border=0, bg='white', cursor='hand2',fg='#57a1f8',command=reset_send_otp)
-forget_password.place(x=160, y=160)
+forget_password= Button(frame, width=25, text='Forget password!', border=0, bg='#c7ecee', cursor='hand2',fg='#0652DD',font=('Microsoft YaHei UI Light', 11, "bold"),command=reset_send_otp)
+forget_password.place(x=100, y=230)
 
 def window_destroy_signup():
-    root.geometry('0x0+0+0')
+    #root.geometry('0x0+0+0')
     signup_command()
 
-sign_up= Button(frame, width=6, text='Sign up', border=0, bg='white', cursor='hand2',fg='#57a1f8',command=window_destroy_signup)
-sign_up.place(x=227, y=250)
+sign_up= Button(frame, width=6, text='Sign up', border=0, bg='#c7ecee',font=('Microsoft YaHei UI Light', 11, "bold"), cursor='hand2',fg='#0652DD',command=window_destroy_signup)
+sign_up.place(x=280, y=260)
 
 
 root.mainloop()
